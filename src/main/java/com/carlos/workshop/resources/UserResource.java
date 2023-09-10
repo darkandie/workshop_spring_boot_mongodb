@@ -1,5 +1,6 @@
 package com.carlos.workshop.resources;
 
+import com.carlos.workshop.domain.entities.Post;
 import com.carlos.workshop.domain.entities.User;
 import com.carlos.workshop.dto.UserDTO;
 import com.carlos.workshop.services.UserService;
@@ -30,6 +31,12 @@ public class UserResource {
     public ResponseEntity<UserDTO> findById(@PathVariable String id) {
         User obj = service.findById(id);
         return ResponseEntity.ok().body(new UserDTO(obj));
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 
     @PostMapping
